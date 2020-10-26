@@ -5,9 +5,15 @@ Java spring boot based web api to suggest travel directions on Singapore MRT
 Java 1.8
 
 # How to run
+## Run the jar file
 - Download `transport-0.0.1-SNAPSHOT.jar` from executable directory.
 - Run jar file `java -jar transport-0.0.1-SNAPSHOT.jar`
 - System logs can be found at `logs/system_log.log` in installation directory
+## Build from source code
+- Clone the git repo.
+- Using eclipse import as maven project
+- Locate `com.zendesk.direction.Application.java` 
+- Right click and run as `Spring Boot App`
 
 # API documentation
   After running the jar file api documentation and swagger file can be accessed from following location
