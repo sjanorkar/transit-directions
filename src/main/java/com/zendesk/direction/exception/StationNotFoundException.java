@@ -21,7 +21,7 @@ public class StationNotFoundException extends Exception {
 	}
 
 	public String getMessage() {
-		return message + " does not exist. Station names are case sensitive";
+		return message + " does not exist.";
 	}
 
 	public void setMessage(String message) {

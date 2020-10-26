@@ -3,7 +3,9 @@ package com.zendesk.direction.controller;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zendesk.direction.entity.TravelPlan;
 import com.zendesk.direction.proxy.DirectionGeneratorProxy;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -67,21 +70,23 @@ public class DirectionController extends BaseController {
 	)
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/mrt/from/{from}/to/{to}", method=RequestMethod.GET)
-	public ResponseEntity<String> getRouteByStationName(
+	public ResponseEntity<TravelPlan> getRouteByStationName(
 			@Parameter(description="Source MRT station name", required=true) @PathVariable("from") String from,
 			@Parameter(description="Destination MRT station name", required=true) @PathVariable("to") String to) throws ParseException {
 		
 		final LocalDateTime dateTime = LocalDateTime.now();
+		TravelPlan plan = new TravelPlan();
 		try { 
 			from = from.toLowerCase();
 			to = to.toLowerCase();
 			super.validateInput(from, to, dateTime);
 		} catch(Exception exception){
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+			plan.setError(exception.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(plan);
 		}
 
-		String route = routeGenerator.buildDirections(from, to, dateTime);
-		return ResponseEntity.ok().body(route);
+		plan = routeGenerator.buildDirections(from, to, dateTime);
+		return ResponseEntity.ok().body(plan);
 	}
 	
 	/**
@@ -102,22 +107,25 @@ public class DirectionController extends BaseController {
 	)
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/mrt/from/{from}/to/{to}/datetime/{dateTime}", method=RequestMethod.GET)
-	public ResponseEntity<String> getRouteByStationName(
+	public ResponseEntity<TravelPlan> getRouteByStationName(
 			@Parameter(description="Source MRT station name", required=true) @PathVariable("from") String from,
 			@Parameter(description="Destination MRT station name", required=true) @PathVariable("to") String to, 
 			@Parameter(description="Time to start journey", required=true) @PathVariable("dateTime") @DateTimeFormat(pattern="dd-MM-yyyy HH:mm") Date date) throws ParseException {
 		
 		final LocalDateTime dateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+		
 		try { 
 			from = from.toLowerCase();
 			to = to.toLowerCase();
 			super.validateInput(from, to, dateTime);
 		} catch(Exception exception){
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+			TravelPlan plan = new TravelPlan();
+			plan.setError(exception.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(plan);
 		}
 		
-		String route = routeGenerator.buildDirections(from, to, dateTime);
-		return ResponseEntity.ok().body(route);
+		TravelPlan plan = routeGenerator.buildDirections(from, to, dateTime);
+		return ResponseEntity.ok().body(plan);
 	}
 	
 	
@@ -138,7 +146,7 @@ public class DirectionController extends BaseController {
 	)
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/id/from/{from}/to/{to}", method=RequestMethod.GET)
-	public ResponseEntity<String> getRouteByStationId(
+	public ResponseEntity<TravelPlan> getRouteByStationId(
 			@Parameter(description="Source MRT station id", required=true) @PathVariable("from") String fromId,
 			@Parameter(description="Destination MRT station id", required=true) @PathVariable("to") String toId) throws ParseException {
 		
@@ -151,11 +159,13 @@ public class DirectionController extends BaseController {
 			validateStationId(toId);
 			validateInput(from, to, dateTime);
 		} catch(Exception exception){
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+			TravelPlan plan = new TravelPlan();
+			plan.setError(exception.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(plan);
 		}
 
-		String route = routeGenerator.buildDirections(from, to, dateTime);
-		return ResponseEntity.ok().body(route);
+		TravelPlan plan = routeGenerator.buildDirections(from, to, dateTime);
+		return ResponseEntity.ok().body(plan);
 	}
 	
 	/**
@@ -176,7 +186,7 @@ public class DirectionController extends BaseController {
 	)
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/id/from/{from}/to/{to}/datetime/{dateTime}", method=RequestMethod.GET)
-	public ResponseEntity<String> getRouteByStationId(
+	public ResponseEntity<TravelPlan> getRouteByStationId(
 			@Parameter(description="Source MRT station id", required=true) @PathVariable("from") String fromId,
 			@Parameter(description="Source MRT station id", required=true) @PathVariable("to") String toId, 
 			@Parameter(description="Time to start journey", required=true) @PathVariable("dateTime") @DateTimeFormat(pattern="dd-mm-yyyy HH:mm") Date date) throws ParseException {
@@ -190,10 +200,12 @@ public class DirectionController extends BaseController {
 			validateStationId(toId);
 			validateInput(from, to, dateTime);
 		} catch(Exception exception){
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+			TravelPlan plan = new TravelPlan();
+			plan.setError(exception.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(plan);
 		}
 
-		String route = routeGenerator.buildDirections(from, to, dateTime);
-		return ResponseEntity.ok().body(route);
+		TravelPlan plan = routeGenerator.buildDirections(from, to, dateTime);
+		return ResponseEntity.ok().body(plan);
 	}
 }

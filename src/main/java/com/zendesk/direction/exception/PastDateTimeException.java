@@ -9,7 +9,7 @@ public class PastDateTimeException extends Exception {
 
 	private static final long serialVersionUID = 126987397771094348L;
 
-	private String message = "Cannot generate trasit directions for past date & time";
+	private String message = "Cannot generate transit directions for past date & time";
 	
 	public PastDateTimeException() {
 		super();
