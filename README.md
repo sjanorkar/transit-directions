@@ -9,7 +9,7 @@ Java 1.8
 - Run jar file `java -jar transport-0.0.1-SNAPSHOT.jar`
 
 # API documentation
-  After running the jar file swagger documentation and swagger files can be accessed from following location
+  After running the jar file api documentation and swagger file can be accessed from following location
 - Visit this url to access swagger documentation of APIs
   http://localhost:8080/swagger-ui.html
 - Swagger file can be found here
