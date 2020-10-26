@@ -14,7 +14,7 @@ Java 1.8
 - Swagger file can be found here
   http://localhost:8080/v2/api-docs
   
-# API details
+# Usage guidelines
 - Transit directions can be fetched either by using mrt station names or mrt ids.
 - MRT station names are case insensitive, but mrt ids are case sensitive.
 - If date & time of travel is not specified then directions will be generated for current date & time.
