@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 
 import com.zendesk.direction.core.MrtDetailsLoader;
 import com.zendesk.direction.entity.MrtStation;
+import com.zendesk.direction.exception.PastDateTimeException;
 import com.zendesk.direction.exception.StationClosedException;
 import com.zendesk.direction.exception.StationNotFoundException;
 import com.zendesk.direction.exception.StationNotReadyException;
@@ -52,8 +53,13 @@ public class BaseController {
 	 * @throws ParseException: if Datetime is invalid
 	 * @throws StationClosedException: if station is closed at night
 	 * @throws StationNotReadyException: if station is not ready yet
+	 * @throws PastDateTimeException : if datetime is less than current datetime
 	 */
-	protected void validateInput(String from, String to, LocalDateTime dateTime) throws StationNotFoundException, ParseException, StationClosedException, StationNotReadyException {
+	protected void validateInput(String from, String to, LocalDateTime dateTime) throws StationNotFoundException, ParseException, StationClosedException, StationNotReadyException, PastDateTimeException {
+		
+		if (isPastDate(dateTime)) {
+			throw new PastDateTimeException();
+		}
 		if (!isStationExist(from)) {
 			throw new StationNotFoundException("Station name " + from);
 		}
@@ -79,6 +85,18 @@ public class BaseController {
 		}
 	}
 	
+	/**
+	 * Check if datetime is less than current datetime  
+	 * @param dateTime : datetime
+	 * @return true is datetime is less than current datetime else false
+	 */
+	private boolean isPastDate(LocalDateTime dateTime) {
+		final LocalDateTime now = LocalDateTime.now();
+		if (dateTime.isBefore(now)) {
+			return true;
+		}
+		return false;
+	}
 	/**
 	 * Get mrt station name for given station id
 	 * @param id: mrt station id
