@@ -4,6 +4,15 @@ Java spring boot based web api to suggest travel directions on Singapore MRT
 # Pre-requisite
 Java 1.8
 
+# Technologies used
+  - Java 1.8
+  - Spring Boot
+  - Spring MVC
+  - Junit 5
+  - Mockito
+  - Maven
+  - Swagger core 2.0
+  
 # How to run
 ## Run the jar file
 - Download `transport-0.0.1-SNAPSHOT.jar` from executable directory.
