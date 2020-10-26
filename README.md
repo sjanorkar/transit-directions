@@ -7,6 +7,7 @@ Java 1.8
 # How to run
 - Download `transport-0.0.1-SNAPSHOT.jar` from executable directory.
 - Run jar file `java -jar transport-0.0.1-SNAPSHOT.jar`
+- System logs can be found at `logs/system_log.log` in installation directory
 
 # API documentation
   After running the jar file api documentation and swagger file can be accessed from following location
