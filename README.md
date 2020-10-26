@@ -22,15 +22,15 @@ Java 1.8
 
 # API details 
 ## Fetch by source and destination MRT names for current date time
-    - directions/mrt/from/{from}/to/{to}
-    > directions/mrt/from/bishan/to/clementi
+     directions/mrt/from/{from}/to/{to}
+     directions/mrt/from/bishan/to/clementi
 ## Fetch by source and destination MRT names for specific date time 
-    - directions/mrt/from/{from}/to/{to}/datetime/{datetime}
-    > directions/mrt/from/bishan/to/clementi/26-10-2020 19:30
+     directions/mrt/from/{from}/to/{to}/datetime/{datetime}
+     directions/mrt/from/bishan/to/clementi/26-10-2020 19:30
 ## Fetch by source and destination MRT ids for current date time
-    - directions/id/from/{from}/to/{to}
-    > directions/id/from/CC13/to/EW5
+     directions/id/from/{from}/to/{to}
+     directions/id/from/CC13/to/EW5
 ## Fetch by source and destination MRT ids for specific date time 
-    - directions/id/from/{from}/to/{to}/datetime/{datetime}
-    > directions/id/from/CC13/to/EW5/26-10-2020 19:30   
+     directions/id/from/{from}/to/{to}/datetime/{datetime}
+     directions/id/from/CC13/to/EW5/26-10-2020 19:30   
   
